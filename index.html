@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garage Nove — Only Special Cars · Roma</title>
+<meta name="description" content="Vendita vetture d'epoca, youngtimer e sportive di eccellenza a Roma. Porsche, Lamborghini, Mercedes e molto altro. Garage Nove di Giorgio Cabeto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1a1714;
+  --paper: #f7f4ef;
+  --paper-warm: #efe9df;
+  --paper-dark: #e0d8cc;
+  --gold: #b8935a;
+  --gold-light: #d4b07a;
+  --sold-red: #c0392b;
+  --smoke: #6b6560;
+  --fog: #9e9790;
+  --mist: #c8c2ba;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+/* PAGE SWITCHER */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── HEADER ── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  background: rgba(247,244,239,0.96); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--paper-dark);
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; padding: 0 48px; height: 68px;
+}
+.header-nav { display: flex; gap: 28px; list-style: none; }
+.header-nav a, .header-nav button {
+  background: none; border: none; cursor: pointer; padding: 0;
+  font-family: var(--sans); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--smoke); text-decoration: none; transition: color 0.2s;
+}
+.header-nav a:hover, .header-nav button:hover { color: var(--ink); }
+.header-nav button.sold-nav { color: var(--sold-red); }
+.header-nav button.sold-nav:hover { color: #96281b; }
+.logo { text-align: center; text-decoration: none; display: block; }
+.logo-main { font-family: var(--serif); font-size: 26px; font-weight: 500; letter-spacing: 0.08em; color: var(--ink); display: block; line-height: 1; }
+.logo-tag { font-family: var(--sans); font-size: 9px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); display: block; margin-top: 3px; }
+.header-right { display: flex; justify-content: flex-end; align-items: center; gap: 16px; }
+.lang-switch { display: flex; border: 1px solid var(--mist); overflow: hidden; }
+.lang-btn { background: none; border: none; font-family: var(--sans); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fog); padding: 5px 10px; cursor: pointer; transition: all 0.2s; }
+.lang-btn.active { background: var(--ink); color: var(--paper); }
+.btn-fill { font-family: var(--sans); font-size: 10px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--paper); background: var(--ink); padding: 10px 22px; text-decoration: none; transition: background 0.2s; display: inline-block; }
+.btn-fill:hover { background: var(--gold); }
+
+/* ── HERO ── */
+.hero { padding-top: 68px; display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+.hero-visual { position: relative; overflow: hidden; background: var(--ink); min-height: 580px; }
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 9s ease; }
+.hero-visual:hover img { transform: scale(1.04); }
+.hero-visual-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(26,23,20,0.25) 0%, transparent 50%); pointer-events: none; }
+.hero-car-label { position: absolute; top: 36px; right: 36px; text-align: right; }
+.hcl-make { font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; }
+.hcl-model { font-family: var(--serif); font-size: 30px; font-style: italic; color: var(--paper); display: block; line-height: 1.1; }
+.hcl-sub { font-size: 11px; color: rgba(247,244,239,0.45); display: block; font-family: var(--sans); margin-top: 3px; }
+.hero-price-tag { position: absolute; bottom: 36px; left: 36px; border-top: 1px solid var(--gold); padding-top: 10px; }
+.hero-price-tag strong { font-family: var(--serif); font-size: 38px; font-weight: 300; color: var(--paper); display: block; }
+.hero-price-tag small { font-family: var(--sans); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fog); }
+.hero-content { padding: 80px 64px 80px 72px; display: flex; flex-direction: column; justify-content: center; background: var(--paper); position: relative; }
+.hero-kicker { font-family: var(--sans); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+.hero-kicker::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
+.hero-headline { font-family: var(--serif); font-size: clamp(50px, 4.8vw, 80px); font-weight: 300; line-height: 1.0; margin-bottom: 28px; }
+.hero-headline em { font-style: italic; color: var(--gold); }
+.hero-body { font-size: 14px; color: var(--smoke); line-height: 1.9; max-width: 360px; margin-bottom: 44px; }
+.cta-row { display: flex; gap: 20px; align-items: center; }
+.btn-outline { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--smoke); text-decoration: none; border-bottom: 1px solid var(--mist); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+.btn-outline:hover { color: var(--ink); border-color: var(--ink); }
+.hero-stats { position: absolute; bottom: 48px; right: 0; display: flex; flex-direction: column; border-left: 1px solid var(--paper-dark); }
+.stat { padding: 14px 36px 14px 22px; border-bottom: 1px solid var(--paper-dark); }
+.stat:last-child { border-bottom: none; }
+.stat-n { font-family: var(--serif); font-size: 30px; font-weight: 300; color: var(--ink); line-height: 1; display: block; }
+.stat-l { font-family: var(--sans); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fog); display: block; margin-top: 2px; }
+
+/* ── SECTION COMMON ── */
+.sec-eyebrow { font-family: var(--sans); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; }
+.sec-title { font-family: var(--serif); font-size: clamp(34px, 3.2vw, 52px); font-weight: 300; line-height: 1.05; }
+.sec-title em { font-style: italic; color: var(--gold); }
+.rule { display: flex; align-items: center; gap: 24px; padding: 0 80px; }
+.rule::before, .rule::after { content: ''; flex: 1; height: 1px; background: var(--paper-dark); }
+.rule-txt { font-family: var(--sans); font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mist); white-space: nowrap; }
+
+/* ── INVENTORY ── */
+#vetture { padding: 88px 80px; }
+.inv-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px; }
+.live-badge { display: flex; align-items: center; gap: 8px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--smoke); border: 1px solid var(--mist); padding: 10px 18px; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+.live-badge:hover { border-color: var(--gold); color: var(--gold); }
+.live-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: blink 2.5s ease-in-out infinite; flex-shrink: 0; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* Featured */
+.car-featured { display: grid; grid-template-columns: 3fr 2fr; background: var(--ink); margin-bottom: 3px; min-height: 400px; }
+.car-feat-img { position: relative; overflow: hidden; }
+.car-feat-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+.car-featured:hover .car-feat-img img { transform: scale(1.04); }
+.car-feat-body { padding: 44px 48px; display: flex; flex-direction: column; justify-content: space-between; }
+.car-feat-tag { display: inline-block; font-family: var(--sans); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,147,90,0.4); padding: 4px 10px; margin-bottom: 20px; align-self: flex-start; }
+.car-feat-make { font-family: var(--sans); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.car-feat-model { font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--paper); line-height: 1.0; }
+.car-feat-variant { font-family: var(--serif); font-size: 17px; font-style: italic; color: rgba(247,244,239,0.45); margin-bottom: 28px; }
+.specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 36px; }
+.spec-lbl { font-family: var(--sans); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(247,244,239,0.3); display: block; margin-bottom: 1px; }
+.spec-val { font-family: var(--sans); font-size: 13px; color: rgba(247,244,239,0.75); display: block; }
+.car-feat-footer { display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 22px; }
+.car-price { font-family: var(--serif); font-size: 34px; font-weight: 300; color: var(--paper); }
+.car-cta { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(184,147,90,0.35); padding-bottom: 1px; transition: color 0.2s; }
+.car-cta:hover { color: var(--gold-light); }
+
+/* Grid */
+.cars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+
+/* ── CAR CARD (usato per disponibili E sold) ── */
+.car-card { background: var(--paper-warm); overflow: hidden; transition: background 0.3s; position: relative; }
+.car-card:hover { background: var(--paper-dark); }
+.car-card-img { aspect-ratio: 4/3; overflow: hidden; background: var(--ink); position: relative; }
+.car-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+.car-card:hover .car-card-img img { transform: scale(1.06); }
+
+/* SOLD overlay */
+.sold-overlay {
+  position: absolute; inset: 0;
+  background: rgba(26,23,20,0.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+}
+.sold-stamp {
+  border: 3px solid var(--sold-red);
+  color: var(--sold-red);
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  padding: 8px 20px;
+  transform: rotate(-12deg);
+  text-shadow: none;
+  background: rgba(0,0,0,0.15);
+  line-height: 1;
+}
+
+.car-year-badge { position: absolute; top: 0; left: 0; background: var(--paper); font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em; color: var(--ink); padding: 5px 10px; z-index: 3; }
+.car-card-body { padding: 20px 22px 24px; }
+.car-card-make { font-family: var(--sans); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+.car-card-model { font-family: var(--serif); font-size: 25px; font-weight: 400; color: var(--ink); line-height: 1.1; margin-bottom: 12px; }
+.car-card-model.sold-model { color: var(--smoke); }
+.car-meta { display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 16px; }
+.meta-pill { font-family: var(--sans); font-size: 10px; color: var(--smoke); padding-right: 11px; margin-right: 11px; border-right: 1px solid var(--mist); }
+.meta-pill:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.car-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--paper-dark); }
+.car-card-price { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--ink); }
+.car-card-price.sold-price { color: var(--fog); text-decoration: line-through; font-size: 18px; }
+.car-card-link { font-family: var(--sans); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--smoke); text-decoration: none; transition: color 0.2s; }
+.car-card-link:hover { color: var(--gold); }
+.sold-tag-inline { font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sold-red); font-weight: 400; }
+
+.view-all { text-align: center; padding: 48px 0 0; }
+
+/* ── CHI SIAMO ── */
+#chi-siamo { background: var(--ink); display: grid; grid-template-columns: 1fr 1fr; min-height: 580px; }
+.about-visual { position: relative; overflow: hidden; }
+.about-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-visual-placeholder { width: 100%; height: 100%; min-height: 500px; background: #201e1b; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.about-visual-placeholder::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px); }
+.about-caption { position: absolute; bottom: 0; left: 0; right: 0; background: var(--gold); padding: 14px 36px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); }
+.about-content { padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
+.about-content .sec-eyebrow { color: var(--gold); }
+.about-content .sec-title { color: var(--paper); margin-bottom: 28px; }
+.about-body { font-size: 14px; color: rgba(247,244,239,0.55); line-height: 1.9; margin-bottom: 18px; }
+.about-quote { margin: 28px 0; padding-left: 20px; border-left: 2px solid var(--gold); }
+.about-quote p { font-family: var(--serif); font-size: 21px; font-style: italic; color: rgba(247,244,239,0.8); line-height: 1.5; }
+.about-quote cite { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-style: normal; display: block; margin-top: 10px; }
+.review-row { display: flex; align-items: center; gap: 14px; margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; }
+.review-txt { font-size: 12px; color: rgba(247,244,239,0.35); }
+
+/* ── SERVIZI ── */
+#servizi { background: var(--paper-warm); padding: 88px 80px; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 56px; }
+.service-item { background: var(--paper); padding: 36px 32px 40px; position: relative; overflow: hidden; transition: background 0.3s; }
+.service-item::after { content: ''; position: absolute; bottom: 0; left: 0; right: 100%; height: 2px; background: var(--gold); transition: right 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+.service-item:hover::after { right: 0; }
+.service-item:hover { background: var(--paper-dark); }
+.service-num { font-family: var(--serif); font-size: 60px; font-weight: 300; color: var(--paper-dark); line-height: 1; margin-bottom: 20px; }
+.service-title { font-family: var(--serif); font-size: 21px; font-weight: 400; color: var(--ink); margin-bottom: 10px; }
+.service-body { font-size: 13px; color: var(--smoke); line-height: 1.85; }
+
+/* ── CONTACT ── */
+#contatti { display: grid; grid-template-columns: 1fr 1fr; }
+.contact-map { background: var(--paper-warm); min-height: 520px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.contact-map::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--paper-dark) 1px, transparent 1px), linear-gradient(90deg, var(--paper-dark) 1px, transparent 1px); background-size: 48px 48px; opacity: 0.5; }
+.map-marker { position: relative; z-index: 1; text-align: center; }
+.map-pin-ring { width: 44px; height: 44px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; animation: ping 3s ease-in-out infinite; }
+@keyframes ping { 0%,100%{ box-shadow: 0 0 0 0 rgba(184,147,90,0.3); } 50%{ box-shadow: 0 0 0 16px rgba(184,147,90,0); } }
+.map-pin-dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; }
+.map-addr { font-family: var(--sans); font-size: 12px; color: var(--smoke); }
+.map-addr strong { display: block; font-weight: 500; color: var(--ink); font-size: 13px; margin-bottom: 3px; }
+.contact-body { padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
+.contact-list { margin: 40px 0; }
+.contact-row { display: flex; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--paper-dark); }
+.contact-row:first-child { border-top: 1px solid var(--paper-dark); }
+.contact-lbl { font-family: var(--sans); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mist); min-width: 80px; }
+.contact-val { font-family: var(--serif); font-size: 18px; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+a.contact-val:hover { color: var(--gold); }
+.wa-btn { display: inline-flex; align-items: center; gap: 11px; background: #1a9e50; color: white; font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; padding: 15px 30px; text-decoration: none; transition: background 0.2s, transform 0.15s; align-self: flex-start; }
+.wa-btn:hover { background: #168040; transform: translateY(-1px); }
+.wa-icon { width: 17px; height: 17px; fill: currentColor; flex-shrink: 0; }
+
+/* ── SOLD PAGE ── */
+#page-sold { padding-top: 68px; background: var(--paper); min-height: 100vh; }
+.sold-header { padding: 72px 80px 56px; border-bottom: 1px solid var(--paper-dark); display: flex; align-items: flex-end; justify-content: space-between; }
+.sold-header-back { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--smoke); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+.sold-header-back:hover { color: var(--gold); }
+.sold-seo-text { padding: 40px 80px; background: var(--paper-warm); border-bottom: 1px solid var(--paper-dark); }
+.sold-seo-text p { font-size: 14px; color: var(--smoke); line-height: 1.9; max-width: 680px; }
+.sold-seo-text p strong { color: var(--ink); font-weight: 500; }
+.sold-grid-wrap { padding: 56px 80px 88px; }
+.sold-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+/* Full detail card for sold page */
+.sold-detail-card { background: var(--paper-warm); overflow: hidden; }
+.sold-detail-card:hover { background: var(--paper-dark); }
+.sold-detail-img { aspect-ratio: 16/10; overflow: hidden; background: var(--ink); position: relative; }
+.sold-detail-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(20%); transition: transform 0.7s ease, filter 0.3s; }
+.sold-detail-card:hover .sold-detail-img img { transform: scale(1.04); filter: grayscale(0%); }
+.sold-detail-body { padding: 22px 24px 26px; }
+.sold-detail-make { font-family: var(--sans); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--fog); margin-bottom: 3px; }
+.sold-detail-model { font-family: var(--serif); font-size: 24px; font-weight: 400; color: var(--smoke); line-height: 1.1; margin-bottom: 10px; }
+.sold-detail-desc { font-size: 12px; color: var(--fog); line-height: 1.7; margin-bottom: 14px; }
+.sold-detail-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--paper-dark); }
+.sold-detail-price { font-family: var(--serif); font-size: 18px; color: var(--fog); text-decoration: line-through; }
+.sold-detail-badge { font-family: var(--sans); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sold-red); border: 1px solid rgba(192,57,43,0.3); padding: 3px 8px; }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); padding: 48px 80px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.footer-copy { font-family: var(--sans); font-size: 11px; color: rgba(247,244,239,0.2); }
+.footer-logo-txt { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: 0.1em; color: rgba(247,244,239,0.35); text-decoration: none; }
+.footer-links { display: flex; justify-content: flex-end; gap: 22px; }
+.footer-link { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(247,244,239,0.2); text-decoration: none; transition: color 0.2s; }
+.footer-link:hover { color: var(--gold); }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  header { padding: 0 24px; grid-template-columns: 1fr auto; }
+  .header-nav { display: none; }
+  .hero, #chi-siamo, #contatti { grid-template-columns: 1fr; }
+  .hero-content { padding: 56px 28px; }
+  .hero-stats { position: static; flex-direction: row; border: none; border-top: 1px solid var(--paper-dark); }
+  #vetture, #servizi { padding: 64px 28px; }
+  .inv-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .car-featured { grid-template-columns: 1fr; }
+  .cars-grid, .services-grid, .sold-grid { grid-template-columns: 1fr; }
+  .rule { padding: 0 28px; }
+  footer { grid-template-columns: 1fr; gap: 16px; text-align: center; padding: 36px 28px; }
+  .footer-links { justify-content: center; }
+  .sold-header, .sold-seo-text, .sold-grid-wrap { padding-left: 28px; padding-right: 28px; }
+  .contact-body { padding: 56px 28px; }
+  .about-content { padding: 56px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <ul class="header-nav">
+      <li><a href="#" onclick="showPage('home')" data-it="Vetture" data-en="Cars">Vetture</a></li>
+      <li><a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('chi-siamo').scrollIntoView({behavior:'smooth'}),100); return false;" data-it="Chi Siamo" data-en="About">Chi Siamo</a></li>
+      <li><a href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('servizi').scrollIntoView({behavior:'smooth'}),100); return false;" data-it="Servizi" data-en="Services">Servizi</a></li>
+      <li><button class="sold-nav" onclick="showPage('sold')" data-it="SOLD" data-en="SOLD">SOLD</button></li>
+    </ul>
+  </nav>
+  <a href="#" class="logo" onclick="showPage('home')">
+    <span class="logo-main">Garage Nove</span>
+    <span class="logo-tag">Only Special Cars</span>
+  </a>
+  <div class="header-right">
+    <a href="#contatti" class="btn-fill" onclick="if(currentPage!=='home'){showPage('home');setTimeout(()=>document.getElementById('contatti').scrollIntoView({behavior:'smooth'}),100);return false;}" data-it="Contattaci" data-en="Contact">Contattaci</a>
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ HOME PAGE ═══════════ -->
+<div id="page-home" class="page active">
+
+<!-- HERO: Lamborghini Gallardo — foto reale Subito -->
+<section class="hero">
+  <div class="hero-visual">
+    <img
+      src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/bd/bd036561-72ba-4d7e-956f-7bdf9333c399?rule=gallery-mobile-1x-auto"
+      alt="Lamborghini Gallardo LP560-4 Garage Nove Roma"
+      loading="eager"
+    >
+    <div class="hero-visual-overlay"></div>
+    <div class="hero-car-label">
+      <span class="hcl-make">Lamborghini</span>
+      <span class="hcl-model">Gallardo<br>LP 560-4</span>
+      <span class="hcl-sub">2013 · 26.000 km · Grigio</span>
+    </div>
+    <div class="hero-price-tag">
+      <strong>€ 165.000</strong>
+      <small data-it="In vendita ora" data-en="Available now">In vendita ora</small>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-kicker" data-it="Roma, dal 2015" data-en="Rome, since 2015">Roma, dal 2015</p>
+    <h1 class="hero-headline">
+      <span data-it="Vetture<br>che fanno<br><em>sognare</em>" data-en="Cars<br>that make<br><em>you dream</em>">Vetture<br>che fanno<br><em>sognare</em></span>
+    </h1>
+    <p class="hero-body" data-it="Una selezione curata di auto d'epoca, youngtimer e sportive di eccellenza a Roma. Ogni vettura scelta con la stessa passione di chi l'ha guidata." data-en="A curated selection of classic cars, youngtimers and exceptional sports cars in Rome. Every vehicle chosen with the same passion as those who drove it.">
+      Una selezione curata di auto d'epoca, youngtimer e sportive di eccellenza a Roma. Ogni vettura scelta con la stessa passione di chi l'ha guidata.
+    </p>
+    <div class="cta-row">
+      <a href="#vetture" class="btn-fill" data-it="Scopri le vetture" data-en="Browse inventory">Scopri le vetture</a>
+      <a href="#contatti" class="btn-outline" data-it="Parla con Giorgio →" data-en="Talk to Giorgio →">Parla con Giorgio →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-n">70+</span>
+        <span class="stat-l" data-it="Recensioni ★★★★★" data-en="5-star reviews">Recensioni ★★★★★</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">2015</span>
+        <span class="stat-l" data-it="Fondati a Roma" data-en="Founded in Rome">Fondati a Roma</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><span class="rule-txt" data-it="Inventario corrente" data-en="Current inventory">Inventario corrente</span></div>
+
+<!-- VETTURE DISPONIBILI -->
+<section id="vetture">
+  <div class="inv-header">
+    <div>
+      <span class="sec-eyebrow" data-it="Disponibili ora" data-en="Available now">Disponibili ora</span>
+      <h2 class="sec-title" data-it="Le nostre <em>vetture</em>" data-en="Our <em>vehicles</em>">Le nostre <em>vetture</em></h2>
+    </div>
+    <a href="https://www.autoscout24.it/concessionari/garage-nove-s-a-s-di-cabeto-giorgio" target="_blank" class="live-badge">
+      <span class="live-dot"></span>
+      <span data-it="Aggiornato su AutoScout24" data-en="Live on AutoScout24">Aggiornato su AutoScout24</span>
+    </a>
+  </div>
+
+  <!-- FEATURED: Lamborghini Gallardo -->
+  <div class="car-featured reveal">
+    <div class="car-feat-img">
+      <img
+        src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/03/03526793-b514-42d0-b8eb-eeb6c9a11419?rule=gallery-mobile-1x-auto"
+        alt="Lamborghini Gallardo LP560-4 interni"
+        loading="lazy"
+      >
+    </div>
+    <div class="car-feat-body">
+      <div>
+        <span class="car-feat-tag" data-it="In evidenza" data-en="Featured">In evidenza</span>
+        <p class="car-feat-make">Lamborghini</p>
+        <h3 class="car-feat-model">Gallardo</h3>
+        <p class="car-feat-variant">5.2 V10 LP560-4 Coupé</p>
+        <div class="specs-grid">
+          <div><span class="spec-lbl" data-it="Anno" data-en="Year">Anno</span><span class="spec-val">2013</span></div>
+          <div><span class="spec-lbl">Km</span><span class="spec-val">26.000 km</span></div>
+          <div><span class="spec-lbl" data-it="Potenza" data-en="Power">Potenza</span><span class="spec-val">560 CV</span></div>
+          <div><span class="spec-lbl" data-it="Cambio" data-en="Gearbox">Cambio</span><span class="spec-val" data-it="Sequenziale" data-en="Sequential">Sequenziale</span></div>
+          <div><span class="spec-lbl">Colore</span><span class="spec-val">Grigio</span></div>
+          <div><span class="spec-lbl">Euro</span><span class="spec-val">Euro 5</span></div>
+        </div>
+      </div>
+      <div class="car-feat-footer">
+        <span class="car-price">€ 165.000</span>
+        <a href="https://www.subito.it/auto/lamborghini-gallardo-5-2-v10-lp560-4-coupe-roma-637743174.htm" target="_blank" class="car-cta" data-it="Vedi annuncio →" data-en="View listing →">Vedi annuncio →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="cars-grid" style="margin-top:3px;">
+
+    <!-- Porsche 911 Carrera 4S -->
+    <div class="car-card reveal">
+      <div class="car-card-img">
+        <img src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/db/dbfc745e-2979-4bd3-86e9-0e861bec5d6c?rule=gallery-mobile-1x-auto" alt="Porsche 911 Carrera 4S" loading="lazy">
+        <span class="car-year-badge">2010</span>
+      </div>
+      <div class="car-card-body">
+        <p class="car-card-make">Porsche</p>
+        <h3 class="car-card-model">911 Carrera 4S</h3>
+        <div class="car-meta">
+          <span class="meta-pill">41.000 km</span>
+          <span class="meta-pill">385 CV</span>
+          <span class="meta-pill" data-it="Automatico" data-en="Automatic">Automatico</span>
+        </div>
+        <div class="car-card-footer">
+          <span class="car-card-price">€ 86.900</span>
+          <a href="https://www.subito.it/auto/porsche-911-carrera-4s-coupe-solo-41-000-km-ita-roma-639052698.htm" target="_blank" class="car-card-link" data-it="Vedi →" data-en="View →">Vedi →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Porsche 718 Cayman -->
+    <div class="car-card reveal">
+      <div class="car-card-img">
+        <img src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/e7/e71a7e6a-df6e-4477-abbe-168385804e6e?rule=gallery-mobile-1x-auto" alt="Porsche 718 Cayman 2019" loading="lazy">
+        <span class="car-year-badge">2019</span>
+      </div>
+      <div class="car-card-body">
+        <p class="car-card-make">Porsche</p>
+        <h3 class="car-card-model">718 Cayman T</h3>
+        <div class="car-meta">
+          <span class="meta-pill">55.000 km</span>
+          <span class="meta-pill">300 CV</span>
+          <span class="meta-pill" data-it="Automatico" data-en="Automatic">Automatico</span>
+        </div>
+        <div class="car-card-footer">
+          <span class="car-card-price">€ 58.500</span>
+          <a href="https://www.subito.it/auto/porsche-718-cayman-2-0-300-cv-2019-roma-638301448.htm" target="_blank" class="car-card-link" data-it="Vedi →" data-en="View →">Vedi →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mercedes SL 350 AMG -->
+    <div class="car-card reveal">
+      <div class="car-card-img">
+        <img src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/f0/f0a8937e-c2a2-4752-a243-cb0c2f086552?rule=gallery-mobile-1x-auto" alt="Mercedes-Benz SL 350 AMG" loading="lazy">
+        <span class="car-year-badge">2009</span>
+      </div>
+      <div class="car-card-body">
+        <p class="car-card-make">Mercedes-Benz</p>
+        <h3 class="car-card-model">SL 350 AMG</h3>
+        <div class="car-meta">
+          <span class="meta-pill">150.000 km</span>
+          <span class="meta-pill">315 CV</span>
+          <span class="meta-pill">R230</span>
+        </div>
+        <div class="car-card-footer">
+          <span class="car-card-price">€ 26.900</span>
+          <a href="https://www.subito.it/auto/mercedes-benz-sl-350-cat-sport-amg-pack-r230-roma-638301454.htm" target="_blank" class="car-card-link" data-it="Vedi →" data-en="View →">Vedi →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Smart ForTwo Prime (con overlay SOLD — esempio di auto venduta recente in home) -->
+    <div class="car-card reveal">
+      <div class="car-card-img">
+        <img src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/65/65c421be-2621-4005-bf92-2380609c80e5?rule=gallery-mobile-1x-auto" alt="Smart ForTwo Prime" loading="lazy">
+        <span class="car-year-badge">2016</span>
+        <div class="sold-overlay">
+          <span class="sold-stamp">SOLD</span>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <p class="car-card-make">Smart</p>
+        <h3 class="car-card-model sold-model">ForTwo Prime</h3>
+        <div class="car-meta">
+          <span class="meta-pill">15.000 km</span>
+          <span class="meta-pill">70 CV</span>
+          <span class="meta-pill" data-it="Automatico" data-en="Automatic">Automatico</span>
+        </div>
+        <div class="car-card-footer">
+          <span class="car-card-price sold-price">€ 14.900</span>
+          <span class="sold-tag-inline">SOLD</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Porsche 911 997 Cabrio ASI (SOLD) -->
+    <div class="car-card reveal">
+      <div class="car-card-img">
+        <img src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/bd/bd036561-72ba-4d7e-956f-7bdf9333c399?rule=gallery-mobile-1x-auto" alt="Porsche 911 Carrera S Cabriolet 2006" loading="lazy">
+        <span class="car-year-badge">2006</span>
+        <div class="sold-overlay">
+          <span class="sold-stamp">SOLD</span>
+        </div>
+      </div>
+      <div class="car-card-body">
+        <p class="car-card-make">Porsche</p>
+        <h3 class="car-card-model sold-model">911 Carrera S Cab.</h3>
+        <div class="car-meta">
+          <span class="meta-pill">54.000 km</span>
+          <span class="meta-pill">355 CV</span>
+          <span class="meta-pill">ASI</span>
+        </div>
+        <div class="car-card-footer">
+          <span class="car-card-price sold-price">€ 69.500</span>
+          <span class="sold-tag-inline">SOLD</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Sold Archive -->
+    <div class="car-card reveal" style="display:flex; align-items:center; justify-content:center; background:var(--ink); cursor:pointer; min-height:340px;" onclick="showPage('sold')">
+      <div style="text-align:center; padding:36px;">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:300; color:rgba(192,57,43,0.25); line-height:1; margin-bottom:16px;">SOLD</p>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; font-style:italic; color:rgba(247,244,239,0.5); margin-bottom:20px;" data-it="Scopri tutte le<br>vetture vendute" data-en="Browse all<br>sold vehicles">Scopri tutte le<br>vetture vendute</p>
+        <span style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(192,57,43,0.6); border-bottom:1px solid rgba(192,57,43,0.3); padding-bottom:2px;" data-it="Vedi archivio →" data-en="View archive →">Vedi archivio →</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHI SIAMO -->
+<section id="chi-siamo">
+  <div class="about-visual">
+    <div class="about-visual-placeholder">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style="opacity:0.06;">
+        <circle cx="50" cy="34" r="26" stroke="white" stroke-width="1.5"/>
+        <path d="M12 90C12 68 29 54 50 54C71 54 88 68 88 90" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="about-caption" data-it="Giorgio Cabeto — Fondatore e Responsabile Vendite" data-en="Giorgio Cabeto — Founder & Sales Manager">Giorgio Cabeto — Fondatore e Responsabile Vendite</div>
+  </div>
+  <div class="about-content reveal">
+    <span class="sec-eyebrow" data-it="Chi siamo" data-en="About us">Chi siamo</span>
+    <h2 class="sec-title" data-it="La passione<br>è il nostro <em>metodo</em>" data-en="Passion<br>is our <em>method</em>">La passione<br>è il nostro <em>metodo</em></h2>
+    <p class="about-body" data-it="Garage Nove nasce nel 2015 dall'idea di Giorgio Cabeto: offrire qualcosa di unico nel panorama romano delle auto speciali. Non un semplice concessionario — un punto di riferimento per chi cerca una vettura con una storia." data-en="Garage Nove was born in 2015 from Giorgio Cabeto's vision: to offer something unique in Rome's special car landscape. Not just a dealer — a reference point for those seeking a car with a history.">
+      Garage Nove nasce nel 2015 dall'idea di Giorgio Cabeto: offrire qualcosa di unico nel panorama romano delle auto speciali. Non un semplice concessionario — un punto di riferimento per chi cerca una vettura con una storia.
+    </p>
+    <p class="about-body" data-it="Disponiamo di un catalogo in continua evoluzione: auto d'epoca, youngtimer e sportive di eccellenza. Quello che non abbiamo in sede, lo troviamo attraverso la nostra rete internazionale di partner." data-en="We maintain a constantly evolving catalogue: classic cars, youngtimers and exceptional sports cars. What we don't have in stock, we source through our international network of partners.">
+      Disponiamo di un catalogo in continua evoluzione: auto d'epoca, youngtimer e sportive di eccellenza. Quello che non abbiamo in sede, lo troviamo attraverso la nostra rete internazionale di partner.
+    </p>
+    <div class="about-quote">
+      <p data-it="&ldquo;L'emozione di guidare una storica non si spiega. Si vive.&rdquo;" data-en="&ldquo;The emotion of driving a classic cannot be described. It must be lived.&rdquo;">&ldquo;L'emozione di guidare una storica non si spiega. Si vive.&rdquo;</p>
+      <cite>— Giorgio Cabeto</cite>
+    </div>
+    <div class="review-row">
+      <span class="stars">★★★★★</span>
+      <span class="review-txt" data-it="70+ recensioni verificate su AutoScout24" data-en="70+ verified reviews on AutoScout24">70+ recensioni verificate su AutoScout24</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIZI -->
+<section id="servizi">
+  <span class="sec-eyebrow" data-it="Cosa facciamo" data-en="What we do">Cosa facciamo</span>
+  <h2 class="sec-title" data-it="Servizi <em>su misura</em>" data-en="<em>Tailored</em> services">Servizi <em>su misura</em></h2>
+  <div class="services-grid">
+    <div class="service-item reveal">
+      <div class="service-num">01</div>
+      <h3 class="service-title" data-it="Vendita Vetture" data-en="Vehicle Sales">Vendita Vetture</h3>
+      <p class="service-body" data-it="Porsche, Lamborghini, Mercedes e altre sportive di eccellenza. Auto d'epoca e youngtimer verificati nei minimi dettagli, con documentazione completa." data-en="Porsche, Lamborghini, Mercedes and other exceptional sports cars. Classic cars and youngtimers verified to the finest detail, with complete documentation.">Porsche, Lamborghini, Mercedes e altre sportive di eccellenza. Auto d'epoca e youngtimer verificati nei minimi dettagli, con documentazione completa.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">02</div>
+      <h3 class="service-title" data-it="Restauro Conservativo" data-en="Conservative Restoration">Restauro Conservativo</h3>
+      <p class="service-body" data-it="Interventi eseguiti con attenzione maniacale all'originalità. Conoscenza approfondita dei veicoli nei minimi particolari — quei dettagli che fanno la differenza." data-en="Work carried out with meticulous attention to originality. Deep vehicle knowledge down to the finest details — those details that make all the difference.">Interventi eseguiti con attenzione maniacale all'originalità. Conoscenza approfondita dei veicoli nei minimi particolari — quei dettagli che fanno la differenza.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">03</div>
+      <h3 class="service-title" data-it="Ricerca Personalizzata" data-en="Custom Search">Ricerca Personalizzata</h3>
+      <p class="service-body" data-it="Hai in mente una vettura specifica? Attraverso la nostra rete internazionale di partner possiamo localizzare l'esemplare giusto ovunque si trovi nel mondo." data-en="Have a specific vehicle in mind? Through our international network of partners we can find the right car anywhere in the world.">Hai in mente una vettura specifica? Attraverso la nostra rete internazionale di partner possiamo localizzare l'esemplare giusto ovunque si trovi nel mondo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <div class="contact-map">
+    <div class="map-marker">
+      <div class="map-pin-ring"><div class="map-pin-dot"></div></div>
+      <div class="map-addr">
+        <strong>Garage Nove</strong>
+        Via del Monte del Grano, 40<br>00175 Roma (RM)
+      </div>
+    </div>
+  </div>
+  <div class="contact-body reveal">
+    <span class="sec-eyebrow" data-it="Trovaci" data-en="Find us">Trovaci</span>
+    <h2 class="sec-title" data-it="Vieni a <em>trovarci</em>" data-en="Come and <em>visit us</em>">Vieni a <em>trovarci</em></h2>
+    <div class="contact-list">
+      <div class="contact-row">
+        <span class="contact-lbl" data-it="Indirizzo" data-en="Address">Indirizzo</span>
+        <span class="contact-val">Via del Monte del Grano, 40 — Roma</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-lbl" data-it="Telefono" data-en="Phone">Telefono</span>
+        <a href="tel:+393477691910" class="contact-val">+39 347 769 1910</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-lbl" data-it="Annunci" data-en="Listings">Annunci</span>
+        <a href="https://www.autoscout24.it/concessionari/garage-nove-s-a-s-di-cabeto-giorgio" target="_blank" class="contact-val">AutoScout24 →</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-lbl" data-it="Orari" data-en="Hours">Orari</span>
+        <span class="contact-val" style="font-size:14px;" data-it="Su appuntamento · Sab 9–12" data-en="By appointment · Sat 9–12">Su appuntamento · Sab 9–12</span>
+      </div>
+    </div>
+    <a href="https://wa.me/393477691910" target="_blank" class="wa-btn">
+      <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span data-it="Scrivi su WhatsApp" data-en="Message on WhatsApp">Scrivi su WhatsApp</span>
+    </a>
+  </div>
+</section>
+
+</div><!-- /page-home -->
+
+
+<!-- ═══════════ SOLD PAGE ═══════════ -->
+<div id="page-sold" class="page">
+
+  <div id="page-sold-inner" style="padding-top:68px;">
+    <div class="sold-header">
+      <div>
+        <span class="sec-eyebrow" style="color:var(--sold-red);" data-it="Archivio venduto" data-en="Sold archive">Archivio venduto</span>
+        <h2 class="sec-title" data-it="Vetture <em>vendute</em>" data-en="<em>Sold</em> vehicles">Vetture <em>vendute</em></h2>
+      </div>
+      <button class="sold-header-back" onclick="showPage('home')">
+        ← <span data-it="Torna alle vetture disponibili" data-en="Back to available cars">Torna alle vetture disponibili</span>
+      </button>
+    </div>
+
+    <!-- SEO TEXT: questo testo indicizza le parole chiave delle auto vendute -->
+    <div class="sold-seo-text">
+      <p data-it="Ogni vettura venduta da Garage Nove fa parte della nostra storia. Qui trovi tutte le auto che abbiamo collocato nel corso degli anni: <strong>Porsche 911, Lamborghini Gallardo, Mercedes SL, Ferrari, BMW M, Alfa Romeo</strong> e molte altre. Se una di queste auto ti interessa o stai cercando un modello simile, contattaci — spesso riusciamo a trovare esemplari analoghi attraverso la nostra rete internazionale di partner." data-en="Every vehicle sold by Garage Nove is part of our history. Here you'll find all the cars we have placed over the years: <strong>Porsche 911, Lamborghini Gallardo, Mercedes SL, Ferrari, BMW M, Alfa Romeo</strong> and many more. If one of these interests you or you're looking for a similar model, contact us — we can often source comparable examples through our international network of partners.">
+        Ogni vettura venduta da Garage Nove fa parte della nostra storia. Qui trovi tutte le auto che abbiamo collocato nel corso degli anni: <strong>Porsche 911, Lamborghini Gallardo, Mercedes SL, Ferrari, BMW M, Alfa Romeo</strong> e molte altre. Se una di queste auto ti interessa o stai cercando un modello simile, contattaci — spesso riusciamo a trovare esemplari analoghi attraverso la nostra rete internazionale di partner.
+      </p>
+    </div>
+
+    <div class="sold-grid-wrap">
+      <div class="sold-grid">
+
+        <!-- SOLD 1: Porsche 911 997 Cabrio -->
+        <div class="sold-detail-card">
+          <div class="sold-detail-img">
+            <img src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/bd/bd036561-72ba-4d7e-956f-7bdf9333c399?rule=gallery-mobile-1x-auto" alt="Porsche 911 Carrera S Cabriolet 2006 Roma" loading="lazy">
+          </div>
+          <div class="sold-detail-body">
+            <p class="sold-detail-make">Porsche</p>
+            <h3 class="sold-detail-model">911 Carrera S Cabriolet</h3>
+            <p class="sold-detail-desc" data-it="997 serie 2006, Carrera S 355 CV, 54.000 km originali, certificata ASI. Colore Carrara White, interni pelle nera, manuale 6 marce." data-en="997 series 2006, Carrera S 355 HP, 54,000 original km, ASI certified. Carrara White, black leather interior, 6-speed manual.">997 serie 2006, Carrera S 355 CV, 54.000 km originali, certificata ASI. Colore Carrara White, interni pelle nera, manuale 6 marce.</p>
+            <div class="sold-detail-footer">
+              <span class="sold-detail-price">€ 69.500</span>
+              <span class="sold-detail-badge">SOLD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SOLD 2: Smart ForTwo Prime -->
+        <div class="sold-detail-card">
+          <div class="sold-detail-img">
+            <img src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/65/65c421be-2621-4005-bf92-2380609c80e5?rule=gallery-mobile-1x-auto" alt="Smart ForTwo Prime 2016 Roma" loading="lazy">
+          </div>
+          <div class="sold-detail-body">
+            <p class="sold-detail-make">Smart</p>
+            <h3 class="sold-detail-model">ForTwo 70 1.0 Prime</h3>
+            <p class="sold-detail-desc" data-it="Anno 2016, solo 15.000 km, benzina, cambio automatico. Condizioni impeccabili, tagliandi documentati, perfetta per la città." data-en="Year 2016, only 15,000 km, petrol, automatic gearbox. Impeccable condition, documented service history, perfect city car.">Anno 2016, solo 15.000 km, benzina, cambio automatico. Condizioni impeccabili, tagliandi documentati, perfetta per la città.</p>
+            <div class="sold-detail-footer">
+              <span class="sold-detail-price">€ 14.900</span>
+              <span class="sold-detail-badge">SOLD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SOLD 3: placeholder per future auto vendute -->
+        <div class="sold-detail-card" style="display:flex; align-items:center; justify-content:center; background:var(--paper-warm); min-height:340px;">
+          <div style="text-align:center; padding:40px; opacity:0.35;">
+            <p style="font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:300; color:var(--smoke); line-height:1; margin-bottom:14px;">∞</p>
+            <p style="font-family:'DM Sans',sans-serif; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--fog);" data-it="Archivio in crescita" data-en="Archive growing">Archivio in crescita</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CTA bottom -->
+      <div style="text-align:center; margin-top:64px; padding-top:56px; border-top:1px solid var(--paper-dark);">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; margin-bottom:16px;" data-it="Cerchi un modello simile?" data-en="Looking for a similar model?">Cerchi un modello simile?</p>
+        <p style="font-size:14px; color:var(--smoke); margin-bottom:28px;" data-it="Contattaci — spesso riusciamo a trovare esemplari analoghi." data-en="Contact us — we can often source comparable examples.">Contattaci — spesso riusciamo a trovare esemplari analoghi.</p>
+        <a href="https://wa.me/393477691910" target="_blank" class="btn-fill" data-it="Scrivi a Giorgio su WhatsApp" data-en="Message Giorgio on WhatsApp">Scrivi a Giorgio su WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-sold -->
+
+
+<!-- FOOTER (shared) -->
+<footer>
+  <p class="footer-copy">© 2025 Garage Nove s.a.s. di Cabeto Giorgio · P.IVA 13268291005</p>
+  <a href="#" class="footer-logo-txt" onclick="showPage('home')">Garage Nove</a>
+  <div class="footer-links">
+    <a href="https://www.autoscout24.it/concessionari/garage-nove-s-a-s-di-cabeto-giorgio" target="_blank" class="footer-link">AutoScout24</a>
+    <a href="https://impresapiu.subito.it/shops/49773-garage-nove-sas-di-cabeto-giorgio" target="_blank" class="footer-link">Subito</a>
+    <button class="footer-link" style="background:none;border:none;cursor:pointer;" onclick="showPage('sold')" data-it="Archivio SOLD" data-en="SOLD Archive">Archivio SOLD</button>
+  </div>
+</footer>
+
+<script>
+let currentLang = 'it';
+let currentPage = 'home';
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  currentPage = name;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Trigger reveals on new page
+  setTimeout(() => {
+    document.querySelectorAll('#page-' + name + ' .reveal').forEach(el => io.observe(el));
+  }, 100);
+  return false;
+}
+
+function setLang(l) {
+  currentLang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  document.querySelectorAll('[data-it]').forEach(el => {
+    const txt = el.getAttribute('data-' + l);
+    if (txt) el.innerHTML = txt;
+  });
+}
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 70);
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('#page-home .reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
