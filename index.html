@@ -391,13 +391,62 @@ a.contact-val:hover { color: var(--gold); }
 .sold-detail-price { font-family: var(--serif); font-size: 18px; color: var(--fog); text-decoration: line-through; }
 .sold-detail-badge { font-family: var(--sans); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sold-red); border: 1px solid rgba(192,57,43,0.3); padding: 3px 8px; }
 
+/* ── RECENSIONI ── */
+#recensioni { background: var(--ink); padding: 96px 80px; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 56px; margin-bottom: 56px; }
+.review-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 36px 32px 32px; display: flex; flex-direction: column; transition: background 0.3s, border-color 0.3s; }
+.review-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(184,147,90,0.25); }
+.review-stars { color: var(--gold); font-size: 13px; letter-spacing: 3px; margin-bottom: 22px; display: block; }
+.review-quote { font-family: var(--serif); font-size: 18px; font-style: italic; font-weight: 300; color: rgba(247,244,239,0.78); line-height: 1.7; flex: 1; margin-bottom: 28px; }
+.review-quote::before { content: '\201C'; } .review-quote::after { content: '\201D'; }
+.review-meta { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 18px; display: flex; align-items: baseline; justify-content: space-between; }
+.review-author { font-family: var(--sans); font-size: 12px; font-weight: 500; color: rgba(247,244,239,0.55); letter-spacing: 0.06em; }
+.review-date { font-family: var(--sans); font-size: 10px; color: rgba(247,244,239,0.2); }
+.reviews-cta-wrap { text-align: center; padding-top: 8px; }
+.reviews-score { display: inline-flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+.reviews-score-num { font-family: var(--serif); font-size: 52px; font-weight: 300; color: var(--paper); line-height: 1; }
+.reviews-score-detail { text-align: left; }
+.reviews-score-detail span { display: block; }
+.reviews-score-stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; }
+.reviews-score-sub { font-family: var(--sans); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(247,244,239,0.3); margin-top: 2px; }
+.reviews-cta-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(184,147,90,0.35); padding-bottom: 2px; margin-top: 24px; transition: color 0.2s, border-color 0.2s; }
+.reviews-cta-link:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
 /* ── FOOTER ── */
 footer { background: var(--ink); padding: 48px 80px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
 .footer-copy { font-family: var(--sans); font-size: 11px; color: rgba(247,244,239,0.2); }
 .footer-logo-txt { font-family: var(--serif); font-size: 20px; font-weight: 400; letter-spacing: 0.1em; color: rgba(247,244,239,0.35); text-decoration: none; }
-.footer-links { display: flex; justify-content: flex-end; gap: 22px; }
-.footer-link { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(247,244,239,0.2); text-decoration: none; transition: color 0.2s; }
+.footer-links { display: flex; justify-content: flex-end; gap: 22px; align-items: center; flex-wrap: wrap; }
+.footer-link { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(247,244,239,0.2); text-decoration: none; transition: color 0.2s; display: inline-flex; align-items: center; gap: 5px; }
 .footer-link:hover { color: var(--gold); }
+
+/* ── WHATSAPP FLOATING ── */
+.wa-float {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  z-index: 400;
+  width: 56px; height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.wa-float:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,0.5); }
+.wa-float::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: #25D366;
+  animation: wa-pulse 2.8s ease-out infinite;
+  z-index: -1;
+}
+@keyframes wa-pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
 
 /* ── REVEAL ── */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
@@ -429,6 +478,8 @@ footer { background: var(--ink); padding: 48px 80px; display: grid; grid-templat
   .contact-body { padding: 48px 24px; }
   .about-content { padding: 48px 24px; }
   .sold-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  #recensioni { padding: 64px 24px; }
   .contact-map { min-height: 240px; }
 }
 </style>
@@ -509,7 +560,7 @@ footer { background: var(--ink); padding: 48px 80px; display: grid; grid-templat
       </div>
       <div class="stat">
         <span class="stat-n">2015</span>
-        <span class="stat-l" data-it="Fondati a Roma" data-en="Founded in Rome">Fondati a Roma</span>
+        <span class="stat-l" data-it="Dal 2015 · Roma" data-en="Since 2015 · Rome">Dal 2015 · Roma</span>
       </div>
     </div>
   </div>
@@ -776,6 +827,13 @@ footer { background: var(--ink); padding: 48px 80px; display: grid; grid-templat
         <a href="https://www.autoscout24.it/concessionari/garage-nove-s-a-s-di-cabeto-giorgio" target="_blank" class="contact-val">AutoScout24 →</a>
       </div>
       <div class="contact-row">
+        <span class="contact-lbl">Instagram</span>
+        <a href="https://www.instagram.com/garagenove_/" target="_blank" class="contact-val" style="display:inline-flex;align-items:center;gap:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @garagenove_
+        </a>
+      </div>
+      <div class="contact-row">
         <span class="contact-lbl" data-it="Orari" data-en="Hours">Orari</span>
         <span class="contact-val" style="font-size:14px;" data-it="Su appuntamento · Sab 9–12" data-en="By appointment · Sat 9–12">Su appuntamento · Sab 9–12</span>
       </div>
@@ -868,16 +926,79 @@ footer { background: var(--ink); padding: 48px 80px; display: grid; grid-templat
 </div><!-- /page-sold -->
 
 
+<!-- RECENSIONI (shared — visibile in home e sold) -->
+<section id="recensioni">
+  <span class="sec-eyebrow" data-it="Cosa dicono di noi" data-en="What they say about us">Cosa dicono di noi</span>
+  <h2 class="sec-title" style="color:var(--paper);" data-it="Le <em>recensioni</em><br>dei nostri clienti" data-en="Our clients'<br><em>reviews</em>">Le <em>recensioni</em><br>dei nostri clienti</h2>
+
+  <div class="reviews-grid">
+
+    <!-- Recensione 1: Nicolas -->
+    <div class="review-card reveal">
+      <span class="review-stars">★★★★★</span>
+      <p class="review-quote" data-it="Giorgio ci ha fatto subito una buona impressione. Non è il classico rivenditore... si vede che ama davvero quello che fa, conosce ogni dettaglio delle auto che tratta e ti trasmette una passione vera per il mondo delle auto d'epoca." data-en="Giorgio made a great impression right away. He's not your typical dealer... you can tell he genuinely loves what he does, knows every detail of the cars he sells and transmits a true passion for classic cars.">Giorgio ci ha fatto subito una buona impressione. Non è il classico rivenditore... si vede che ama davvero quello che fa, conosce ogni dettaglio delle auto che tratta e ti trasmette una passione vera per il mondo delle auto d'epoca.</p>
+      <div class="review-meta">
+        <span class="review-author">Nicolas</span>
+        <span class="review-date">Gen 2026</span>
+      </div>
+    </div>
+
+    <!-- Recensione 2: Gianfranco -->
+    <div class="review-card reveal">
+      <span class="review-stars">★★★★★</span>
+      <p class="review-quote" data-it="Esperienza di acquisto molto positiva. Venditore affidabile, competente, preciso e davvero cordiale sia durante la fase di acquisto che nel post-vendita." data-en="Very positive buying experience. Reliable, competent, precise and genuinely friendly dealer, both during the purchase and after the sale.">Esperienza di acquisto molto positiva. Venditore affidabile, competente, preciso e davvero cordiale sia durante la fase di acquisto che nel post-vendita.</p>
+      <div class="review-meta">
+        <span class="review-author">Gianfranco</span>
+        <span class="review-date">Nov 2025</span>
+      </div>
+    </div>
+
+    <!-- Recensione 3: Pietro Barba -->
+    <div class="review-card reveal">
+      <span class="review-stars">★★★★★</span>
+      <p class="review-quote" data-it="Venditore gentile e preparato, molto attento alle esigenze del cliente. Sono contento dell'assistenza ricevuta, anche per la parte burocratica." data-en="Kind and knowledgeable seller, very attentive to the customer's needs. I was very happy with the assistance received, including the paperwork.">Venditore gentile e preparato, molto attento alle esigenze del cliente. Sono contento dell'assistenza ricevuta, anche per la parte burocratica.</p>
+      <div class="review-meta">
+        <span class="review-author">Pietro Barba</span>
+        <span class="review-date">Nov 2025</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Score + CTA -->
+  <div class="reviews-cta-wrap">
+    <div class="reviews-score">
+      <span class="reviews-score-num">4,9</span>
+      <div class="reviews-score-detail">
+        <span class="reviews-score-stars">★★★★★</span>
+        <span class="reviews-score-sub" data-it="70 recensioni verificate" data-en="70 verified reviews">70 recensioni verificate</span>
+      </div>
+    </div>
+    <br>
+    <a href="https://www.autoscout24.it/concessionari/garage-nove-s-a-s-di-cabeto-giorgio/recensioni" target="_blank" class="reviews-cta-link" data-it="Leggi tutte le recensioni su AutoScout24 →" data-en="Read all reviews on AutoScout24 →">Leggi tutte le recensioni su AutoScout24 →</a>
+  </div>
+</section>
+
+
 <!-- FOOTER (shared) -->
 <footer>
   <p class="footer-copy">© 2025 Garage Nove s.a.s. di Cabeto Giorgio · P.IVA 13268291005</p>
   <a href="#" class="footer-logo-txt" onclick="showPage('home')">Garage Nove</a>
   <div class="footer-links">
+    <a href="https://www.instagram.com/garagenove_/" target="_blank" class="footer-link" style="display:inline-flex;align-items:center;gap:6px;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      @garagenove_
+    </a>
     <a href="https://www.autoscout24.it/concessionari/garage-nove-s-a-s-di-cabeto-giorgio" target="_blank" class="footer-link">AutoScout24</a>
     <a href="https://impresapiu.subito.it/shops/49773-garage-nove-sas-di-cabeto-giorgio" target="_blank" class="footer-link">Subito</a>
     <button class="footer-link" style="background:none;border:none;cursor:pointer;" onclick="showPage('sold')" data-it="Archivio SOLD" data-en="SOLD Archive">Archivio SOLD</button>
   </div>
 </footer>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<a href="https://wa.me/393477691910?text=Ciao%20Giorgio%2C%20ho%20visto%20il%20tuo%20sito%20e%20vorrei%20informazioni%20su%20una%20vettura." target="_blank" class="wa-float" title="Scrivi a Giorgio su WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <script>
 let currentLang = 'it';
@@ -916,9 +1037,5 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('#page-home .reveal').forEach(el => io.observe(el));
 </script>
-<a href="https://wa.me/393477691910?text=Ciao%20Giorgio%2C%20ho%20visto%20il%20tuo%20sito%20e%20vorrei%20informazioni%20su%20una%20vettura." target="_blank" style="position:fixed;bottom:28px;right:28px;z-index:400;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;transition:transform 0.2s;" title="Scrivi a Giorgio su WhatsApp">
-<svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
 </body>
 </html>
-
