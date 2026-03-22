@@ -58,33 +58,182 @@ header {
 .btn-fill { font-family: var(--sans); font-size: 10px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--paper); background: var(--ink); padding: 10px 22px; text-decoration: none; transition: background 0.2s; display: inline-block; }
 .btn-fill:hover { background: var(--gold); }
 
-/* ── HERO ── */
-.hero { padding-top: 68px; display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
-.hero-visual { position: relative; overflow: hidden; background: var(--ink); min-height: 580px; }
-.hero-visual img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 9s ease; }
-.hero-visual:hover img { transform: scale(1.04); }
-.hero-visual-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(26,23,20,0.25) 0%, transparent 50%); pointer-events: none; }
-.hero-car-label { position: absolute; top: 36px; right: 36px; text-align: right; }
-.hcl-make { font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; }
-.hcl-model { font-family: var(--serif); font-size: 30px; font-style: italic; color: var(--paper); display: block; line-height: 1.1; }
-.hcl-sub { font-size: 11px; color: rgba(247,244,239,0.45); display: block; font-family: var(--sans); margin-top: 3px; }
-.hero-price-tag { position: absolute; bottom: 36px; left: 36px; border-top: 1px solid var(--gold); padding-top: 10px; }
-.hero-price-tag strong { font-family: var(--serif); font-size: 38px; font-weight: 300; color: var(--paper); display: block; }
-.hero-price-tag small { font-family: var(--sans); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fog); }
-.hero-content { padding: 80px 64px 80px 72px; display: flex; flex-direction: column; justify-content: center; background: var(--paper); position: relative; }
-.hero-kicker { font-family: var(--sans); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
-.hero-kicker::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
-.hero-headline { font-family: var(--serif); font-size: clamp(50px, 4.8vw, 80px); font-weight: 300; line-height: 1.0; margin-bottom: 28px; }
+/* ── HERO VIDEO FULLSCREEN ── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* YouTube iframe wrapper — trucco per riempire lo schermo */
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Overlay scuro opacizzato */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 12, 10, 0.68);
+  z-index: 1;
+}
+
+/* Vignette sui bordi */
+.hero-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 40%, rgba(10,8,6,0.5) 100%);
+}
+
+/* Contenuto sopra il video */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-kicker {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hero-kicker::before, .hero-kicker::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+.hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(44px, 7vw, 96px);
+  font-weight: 300;
+  line-height: 1.0;
+  color: var(--paper);
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
 .hero-headline em { font-style: italic; color: var(--gold); }
-.hero-body { font-size: 14px; color: var(--smoke); line-height: 1.9; max-width: 360px; margin-bottom: 44px; }
-.cta-row { display: flex; gap: 20px; align-items: center; }
-.btn-outline { font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--smoke); text-decoration: none; border-bottom: 1px solid var(--mist); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
-.btn-outline:hover { color: var(--ink); border-color: var(--ink); }
-.hero-stats { position: absolute; bottom: 48px; right: 0; display: flex; flex-direction: column; border-left: 1px solid var(--paper-dark); }
-.stat { padding: 14px 36px 14px 22px; border-bottom: 1px solid var(--paper-dark); }
-.stat:last-child { border-bottom: none; }
-.stat-n { font-family: var(--serif); font-size: 30px; font-weight: 300; color: var(--ink); line-height: 1; display: block; }
-.stat-l { font-family: var(--sans); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fog); display: block; margin-top: 2px; }
+
+.hero-body {
+  font-size: 15px;
+  color: rgba(247,244,239,0.55);
+  line-height: 1.85;
+  max-width: 480px;
+  margin-bottom: 44px;
+  font-weight: 300;
+}
+
+.cta-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-outline {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247,244,239,0.6);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(247,244,239,0.3);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-outline:hover { color: var(--paper); border-color: rgba(247,244,239,0.7); }
+
+/* Stats strip sotto il claim */
+.hero-stats {
+  display: flex;
+  gap: 0;
+  margin-top: 64px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.stat {
+  padding: 20px 40px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+.stat:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--paper);
+  line-height: 1;
+  display: block;
+}
+.stat-l {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247,244,239,0.35);
+  display: block;
+  margin-top: 4px;
+}
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.hero-scroll span {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(247,244,239,0.3);
+}
+.scroll-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(247,244,239,0.3), transparent);
+  animation: scrolldown 2s ease-in-out infinite;
+}
+@keyframes scrolldown {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
 
 /* ── SECTION COMMON ── */
 .sec-eyebrow { font-family: var(--sans); font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; }
@@ -256,21 +405,31 @@ footer { background: var(--ink); padding: 48px 80px; display: grid; grid-templat
 
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
-  header { padding: 0 24px; grid-template-columns: 1fr auto; }
+  header { padding: 0 20px; grid-template-columns: 1fr auto; }
   .header-nav { display: none; }
-  .hero, #chi-siamo, #contatti { grid-template-columns: 1fr; }
-  .hero-content { padding: 56px 28px; }
-  .hero-stats { position: static; flex-direction: row; border: none; border-top: 1px solid var(--paper-dark); }
-  #vetture, #servizi { padding: 64px 28px; }
+  /* Hero mobile */
+  .hero { min-height: 100svh; }
+  .hero-headline { font-size: clamp(38px, 11vw, 56px); }
+  .hero-body { font-size: 13px; }
+  .hero-stats { flex-direction: row; margin-top: 40px; }
+  .stat { padding: 14px 20px; }
+  .stat-n { font-size: 24px; }
+  /* Layout fixes */
+  #chi-siamo, #contatti { grid-template-columns: 1fr; }
+  #vetture, #servizi { padding: 64px 24px; }
   .inv-header { flex-direction: column; align-items: flex-start; gap: 14px; }
   .car-featured { grid-template-columns: 1fr; }
-  .cars-grid, .services-grid, .sold-grid { grid-template-columns: 1fr; }
-  .rule { padding: 0 28px; }
-  footer { grid-template-columns: 1fr; gap: 16px; text-align: center; padding: 36px 28px; }
+  .car-feat-img { min-height: 240px; }
+  .cars-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .rule { padding: 0 24px; }
+  footer { grid-template-columns: 1fr; gap: 16px; text-align: center; padding: 36px 24px; }
   .footer-links { justify-content: center; }
-  .sold-header, .sold-seo-text, .sold-grid-wrap { padding-left: 28px; padding-right: 28px; }
-  .contact-body { padding: 56px 28px; }
-  .about-content { padding: 56px 28px; }
+  .sold-header, .sold-seo-text, .sold-grid-wrap { padding-left: 24px; padding-right: 24px; }
+  .contact-body { padding: 48px 24px; }
+  .about-content { padding: 48px 24px; }
+  .sold-grid { grid-template-columns: 1fr; }
+  .contact-map { min-height: 240px; }
 }
 </style>
 </head>
@@ -302,42 +461,51 @@ footer { background: var(--ink); padding: 48px 80px; display: grid; grid-templat
 <!-- ═══════════ HOME PAGE ═══════════ -->
 <div id="page-home" class="page active">
 
-<!-- HERO: Lamborghini Gallardo — foto reale Subito -->
-<section class="hero">
-  <div class="hero-visual">
-    <img
-      src="https://images.sbito.it/api/v1/sbt-ads-images-pro/images/bd/bd036561-72ba-4d7e-956f-7bdf9333c399?rule=gallery-mobile-1x-auto"
-      alt="Lamborghini Gallardo LP560-4 Garage Nove Roma"
-      loading="eager"
+<!-- HERO VIDEO FULLSCREEN -->
+<section class="hero" style="padding-top:0;">
+
+  <!-- Video R2 in background — autoplay nativo, funziona su iOS -->
+  <div class="hero-video-wrap">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      style="position:absolute;top:50%;left:50%;width:100vw;height:56.25vw;min-height:100vh;min-width:177.78vh;transform:translate(-50%,-50%);object-fit:cover;"
     >
-    <div class="hero-visual-overlay"></div>
-    <div class="hero-car-label">
-      <span class="hcl-make">Lamborghini</span>
-      <span class="hcl-model">Gallardo<br>LP 560-4</span>
-      <span class="hcl-sub">2013 · 26.000 km · Grigio</span>
-    </div>
-    <div class="hero-price-tag">
-      <strong>€ 165.000</strong>
-      <small data-it="In vendita ora" data-en="Available now">In vendita ora</small>
-    </div>
+      <source src="https://pub-213b9b519e9d40f4b320ee44e8b12130.r2.dev/garage-nove/hero.mp4" type="video/mp4">
+    </video>
   </div>
 
+  <!-- Overlay opacizzato -->
+  <div class="hero-overlay"></div>
+
+  <!-- Contenuto centrato -->
   <div class="hero-content">
-    <p class="hero-kicker" data-it="Roma, dal 2015" data-en="Rome, since 2015">Roma, dal 2015</p>
+    <p class="hero-kicker" data-it="Roma · Solo auto speciali · Dal 2015" data-en="Rome · Only special cars · Since 2015">Roma · Solo auto speciali · Dal 2015</p>
+
     <h1 class="hero-headline">
-      <span data-it="Vetture<br>che fanno<br><em>sognare</em>" data-en="Cars<br>that make<br><em>you dream</em>">Vetture<br>che fanno<br><em>sognare</em></span>
+      <span data-it="Ogni auto<br>racconta una<br><em>storia</em>" data-en="Every car<br>tells a<br><em>story</em>">Ogni auto<br>racconta una<br><em>storia</em></span>
     </h1>
-    <p class="hero-body" data-it="Una selezione curata di auto d'epoca, youngtimer e sportive di eccellenza a Roma. Ogni vettura scelta con la stessa passione di chi l'ha guidata." data-en="A curated selection of classic cars, youngtimers and exceptional sports cars in Rome. Every vehicle chosen with the same passion as those who drove it.">
-      Una selezione curata di auto d'epoca, youngtimer e sportive di eccellenza a Roma. Ogni vettura scelta con la stessa passione di chi l'ha guidata.
+
+    <p class="hero-body" data-it="Porsche, Lamborghini, Mercedes e molte altre. Vetture d'epoca, youngtimer e sportive di eccellenza selezionate da Giorgio Cabeto con la stessa passione di chi le ha guidate." data-en="Porsche, Lamborghini, Mercedes and many more. Classic cars, youngtimers and exceptional sports cars selected by Giorgio Cabeto with the same passion as those who drove them.">
+      Porsche, Lamborghini, Mercedes e molte altre. Vetture d'epoca, youngtimer e sportive di eccellenza selezionate da Giorgio Cabeto con la stessa passione di chi le ha guidate.
     </p>
+
     <div class="cta-row">
       <a href="#vetture" class="btn-fill" data-it="Scopri le vetture" data-en="Browse inventory">Scopri le vetture</a>
       <a href="#contatti" class="btn-outline" data-it="Parla con Giorgio →" data-en="Talk to Giorgio →">Parla con Giorgio →</a>
     </div>
+
     <div class="hero-stats">
       <div class="stat">
         <span class="stat-n">70+</span>
         <span class="stat-l" data-it="Recensioni ★★★★★" data-en="5-star reviews">Recensioni ★★★★★</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">500+</span>
+        <span class="stat-l" data-it="Vetture collocate" data-en="Vehicles placed">Vetture collocate</span>
       </div>
       <div class="stat">
         <span class="stat-n">2015</span>
@@ -345,6 +513,13 @@ footer { background: var(--ink); padding: 48px 80px; display: grid; grid-templat
       </div>
     </div>
   </div>
+
+  <!-- Scroll indicator -->
+  <a href="#vetture" class="hero-scroll">
+    <span data-it="Scorri" data-en="Scroll">Scorri</span>
+    <div class="scroll-line"></div>
+  </a>
+
 </section>
 
 <div class="rule"><span class="rule-txt" data-it="Inventario corrente" data-en="Current inventory">Inventario corrente</span></div>
